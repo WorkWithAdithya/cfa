@@ -1,0 +1,14 @@
+sudo su 
+su ec2-user
+cd
+mysqldump --database cafe_db -u root -p > cafe.sql
+
+
+sudo mysql -h endpoint -u admin -p
+create database cafe_db;
+use cafe_db;
+source cafe.sql
+
+exit
+sudo systemctl stop mariadb.service
+sudo systemctl restart httpd
